@@ -110,6 +110,7 @@ class PostMetaDocument
      */
     public function setFile($tmp_name, $filename)
     {
+        $this->removeFile();
         $up = wp_upload_bits($filename, null, file_get_contents($tmp_name));
 
         // Return FALSE on Error.
@@ -125,8 +126,10 @@ class PostMetaDocument
         return true;
     }
 
+    // Remove the file assosiated with this document.
     public function removeFile()
     {
+        if ($this->isFile()) wp_delete_file($this->getFilePath());
         delete_post_meta($this->post->ID, $this->meta_key);
     }
 
