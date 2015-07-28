@@ -24,23 +24,9 @@ class Actions
     }
 
     /**
-     * Call this action when WordPress initialises.
-     */
-    public function init()
-    {
-        register_post_type('document', [
-            'labels' => ['name' => 'Documents', 'singular_name' => 'Document'],
-            'public' => true,
-            'has_archive' => false,
-            'supports' => ['title', 'excerpt'],
-            'taxonomies' => ['category']
-        ]);
-    }
-
-    /**
      * Call this action when WordPress adds meta boxes to a Post Edit page.
      */
-    public function add_meta_boxes_document()
+    public function add_meta_boxes()
     {
         add_meta_box('document_file', 'Document File', function (\WP_Post $post) {
 
@@ -53,7 +39,7 @@ class Actions
             } else {
                 echo '<p style="color:#FF0000;">No Document has been uploaded.</p>';
             }
-        }, 'document');
+        }, 'post');
     }
 
     /**

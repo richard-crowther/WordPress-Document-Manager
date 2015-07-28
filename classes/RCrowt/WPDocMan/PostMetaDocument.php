@@ -55,6 +55,17 @@ class PostMetaDocument
     }
 
     /**
+     * Get the filename of the download.
+     * @return null|string
+     */
+    public function getFileName()
+    {
+        $path = $this->getFileUrl();
+        if ($path) return trim(substr($path, strrpos($path, '/')), '/');
+        else return null;
+    }
+
+    /**
      * Get the lowercase file extension of the document.
      * @return null|string
      */
@@ -73,7 +84,7 @@ class PostMetaDocument
     {
         $filename = 'icons/' . $this->getFileExtension() . '.png';
         if (file_exists(Helpers::getPluginPath(__FILE__, $filename))) return Helpers::getPluginUrl(__FILE__, $filename);
-        else return Helpers::getPluginUrl(__FILE__, 'icons/default.png');
+        else return Helpers::getPluginUrl(__FILE__, 'icons/_blank.png');
     }
 
     /**
